@@ -22,13 +22,7 @@
 @implementation QTClouds
 @end
 
-@implementation QTMainClass
-@end
-
-@implementation QTRain
-@end
-
-@implementation QTSys
+@implementation QTMain
 @end
 
 @implementation QTWeather
