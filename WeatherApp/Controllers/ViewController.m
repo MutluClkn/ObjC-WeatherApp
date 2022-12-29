@@ -19,11 +19,11 @@
 
 @property (strong, nonatomic) NSString *searchText;
 @property (strong, nonatomic) NSDictionary *coord;
-@property (strong, nonatomic) NSNumber *longitude;
-@property (strong, nonatomic) NSNumber *latitude;
 @property (strong, nonatomic) NSMutableString *lonStr;
 @property (strong, nonatomic) NSMutableString *latStr;
-//@property (strong, nonatomic) NSMutableString *completeCoordinate;
+@property (strong, nonatomic) NSMutableString *completeCoordinate;
+@property (strong, nonatomic) NSMutableArray *lonArray;
+@property (strong, nonatomic) NSMutableArray *latArray;
 
 @end
 
@@ -37,11 +37,14 @@
     
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     
+    self.lonArray = NSMutableArray.new;
+    self.latArray = NSMutableArray.new;
+    
+    [self.lonArray addObject:@"41"];
+    [self.latArray addObject:@"2"];
+    
     [self mapConfiguration];
     [self fetchWeather];
-    
-    //self.latStr = @"lat=";
-    //self.lonStr = @"&lon=";
 
 }
 
@@ -54,8 +57,10 @@
 
 #pragma mark - Fetch Coordinates
 -(void)fetchCoordinates{
-   // self.latStr = @"lat=";
-    //self.lonStr = @"&lon=";
+
+    [self.lonArray removeAllObjects];
+    [self.latArray removeAllObjects];
+    
     self.searchText = [self.searchTextField text];
     NSMutableString *urlString = [NSMutableString stringWithString: @"https://api.openweathermap.org/data/2.5/weather?q=&appid=987329bc91f6216677fbf31bf4b51a8b&units=metric"];
     [urlString insertString:self.searchText atIndex:50];
@@ -64,7 +69,7 @@
         
         NSError *err;
         NSDictionary *coordinatesJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
-        NSLog(@"Response data: %@", coordinatesJSON);
+        //NSLog(@"Response data: %@", coordinatesJSON);
         if(err){
             NSLog(@"%@", err);
             return;
@@ -73,33 +78,46 @@
         self.coord = [coordinatesJSON objectForKey:@"coord"];
         NSNumber *longitude = [self.coord objectForKey:@"lon"];
         NSNumber *latitude = [self.coord objectForKey:@"lat"];
-        NSLog(@"%@ and %@", longitude, latitude);
+        //NSLog(@"%@ and %@", longitude, latitude);
         
-        CoordinateModel *coord = [[CoordinateModel alloc] initWithLongitude:longitude andLatitude:latitude];
+        NSString *longString = [longitude stringValue];
+        NSString *latString = [latitude stringValue];
         
-        [self.lonStr appendString:[coord.longitude stringValue]];
-        [self.latStr appendString:[coord.latitude stringValue]];
+        [self.lonStr appendString:[longitude stringValue]];
+        [self.latStr appendString:[latitude stringValue]];
+
+        
+        //NSLog(@"COORDINATES: %@ and %@", longString, latString);
+        
+        [self.lonArray addObject:longString];
+        [self.latArray addObject:latString];
 
         [self fetchWeather];
     }] resume];
 }
 
 #pragma mark - Fetch Weather
-- (void)fetchWeather{
 
-    NSLog(@"HERE BABY: %@",self.lonStr);
-    /*
+- (void)fetchWeather{
+    NSMutableString *latitude = [NSMutableString stringWithString:@"lat="];
+    NSMutableString *longitude = [NSMutableString stringWithString:@"&lon="];
+    
+    [latitude appendString:self.latArray[0]];
+    [longitude appendString:self.lonArray[0]];
+    
+    //NSLog(@"NEW COORDINATES: %@ and %@",latitude, longitude);
+    
     NSMutableString *completeCoordinate = [NSMutableString stringWithString:@""];
-    [completeCoordinate appendString:self.latStr];
-    [completeCoordinate appendString:self.lonStr];
+    [completeCoordinate appendString:latitude];
+    [completeCoordinate appendString:longitude];
+    
     NSMutableString *urlStr = [NSMutableString stringWithString: @"https://api.openweathermap.org/data/2.5/forecast?&appid=987329bc91f6216677fbf31bf4b51a8b&units=metric"];
     [urlStr insertString:completeCoordinate atIndex:49];
-    //NSMutableString *urlString = [NSMutableString stringWithString:urlStr];
-    //[urlStr insertString:self.lonStr atIndex:58];
+
     NSURL *url = [NSURL URLWithString:urlStr];
     
-    NSLog(@"%@", urlStr);
-    /*
+    //NSLog(@"%@", urlStr);
+    
     [[NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         NSError *err;
@@ -109,35 +127,17 @@
             NSLog(@"%@", err);
             return;
         }
-        /*
-        self.coord = [coordinatesJSON objectForKey:@"coord"];
-        self.longitude = [self.coord objectForKey:@"lon"];
-        self.latitude = [self.coord objectForKey:@"lat"];
-*/
         
-        /*
-        NSMutableArray<List *> *courses = NSMutableArray.new;
-        for (NSDictionary *courseDict in courseJSON){
-            NSString *name =  courseDict[@"name"];
-            List *list = List.new;
-            list.name = name;
-            [courses addObject:list];
-            
-            self.courses = courses;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.myTableView reloadData];
-            });
-            
-        }
-        
-    }] resume];*/
+    }] resume];
 }
 
 #pragma mark - Actions
 //Search Button
 - (IBAction)searchButtonDidPress:(UIButton *)sender {
-    [self fetchCoordinates];
-    self.searchTextField.text = @"";
+    if (![self.searchTextField.text  isEqual: @""]){
+        [self fetchCoordinates];
+        self.searchTextField.text = @"";
+    }
 }
 //Current Location of User
 - (IBAction)currentLocationButtonDidPress:(UIButton *)sender {

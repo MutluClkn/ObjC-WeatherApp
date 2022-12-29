@@ -9,12 +9,18 @@
 
 @implementation CoordinateModel
 
-- (instancetype)initWithLongitude:(NSNumber *)longitude andLatitude:(NSNumber *)latitude{
+- (instancetype)initWithLongitude:(NSString *)longitude andLatitude:(NSString *)latitude{
     if (self = [super init]) {
         self.longitude = longitude;
         self.latitude = latitude;
     }
     
     return self;
+}
+
++ (NSArray *)fetchCoord{
+    return @[
+        [[CoordinateModel alloc] initWithLongitude:@"" andLatitude:@""]
+    ];
 }
 @end

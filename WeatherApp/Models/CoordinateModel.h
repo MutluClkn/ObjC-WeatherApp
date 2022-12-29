@@ -11,11 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CoordinateModel : NSObject
 //Properties
-@property NSNumber *longitude;
-@property NSNumber *latitude;
+@property NSString *longitude;
+@property NSString *latitude;
 
 //Initializer
-- (instancetype)initWithLongitude: (NSNumber *)longitude andLatitude: (NSNumber *)latitude;
+- (instancetype)initWithLongitude: (NSString *)longitude andLatitude: (NSString *)latitude;
+
+//Methods
++ (NSArray *)fetchCoord;
 
 @end
 
