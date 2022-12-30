@@ -37,7 +37,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tn-hk-00e">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="890.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="863.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 September, Sunday" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK0-tt-q5o">
                                                 <rect key="frame" x="15" y="89.333333333333343" width="363" height="19.666666666666671"/>
@@ -45,27 +45,26 @@
                                                 <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB2-nV-cdL">
-                                                <rect key="frame" x="35" y="139" width="113" height="93"/>
-                                                <fontDescription key="fontDescription" name="RussoOne-Regular" family="Russo One" pointSize="77"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18.42°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB2-nV-cdL">
+                                                <rect key="frame" x="35" y="139" width="163.33333333333334" height="66.333333333333314"/>
+                                                <fontDescription key="fontDescription" name="RussoOne-Regular" family="Russo One" pointSize="55"/>
                                                 <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear Sky" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FQ-mn-0GG">
-                                                <rect key="frame" x="35" y="232" width="113" height="18.333333333333343"/>
+                                                <rect key="frame" x="35" y="205.33333333333331" width="163.33333333333334" height="18.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="ChakraPetch-Regular" family="Chakra Petch" pointSize="14"/>
                                                 <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clear-Sky" translatesAutoresizingMaskIntoConstraints="NO" id="8ik-a5-gag">
-                                                <rect key="frame" x="158" y="125.66666666666666" width="200" height="120"/>
+                                                <rect key="frame" x="208.33333333333337" y="122.33333333333334" width="149.66666666666663" height="100"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="0Qf-Pg-J2B"/>
-                                                    <constraint firstAttribute="height" constant="120" id="I1S-FU-oHV"/>
+                                                    <constraint firstAttribute="height" constant="100" id="I1S-FU-oHV"/>
                                                 </constraints>
                                             </imageView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O2B-xE-fVg">
-                                                <rect key="frame" x="15" y="460.33333333333337" width="378" height="150"/>
+                                                <rect key="frame" x="15" y="433.66666666666669" width="378" height="150.00000000000006"/>
                                                 <color key="backgroundColor" red="0.1058823529" green="0.1137254902" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="eqy-4Q-xGX"/>
@@ -156,7 +155,7 @@
                                                 </cells>
                                             </collectionView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="RiN-3X-ecx">
-                                                <rect key="frame" x="50" y="300.33333333333331" width="293" height="105"/>
+                                                <rect key="frame" x="50" y="273.66666666666669" width="293" height="105"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z5u-Ju-nCw">
                                                         <rect key="frame" x="0.0" y="0.0" width="64.333333333333329" height="105"/>
@@ -174,7 +173,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2U-UR-cS0">
-                                                                <rect key="frame" x="0.0" y="86.666666666666686" width="64.333333333333329" height="18.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="86.666666666666629" width="64.333333333333329" height="18.333333333333329"/>
                                                                 <fontDescription key="fontDescription" name="ChakraPetch-Regular" family="Chakra Petch" pointSize="14"/>
                                                                 <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -240,7 +239,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clouds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zJ-Ty-snP">
-                                                                <rect key="frame" x="0.0" y="86.666666666666686" width="64.333333333333329" height="18.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="86.666666666666629" width="64.333333333333329" height="18.333333333333329"/>
                                                                 <fontDescription key="fontDescription" name="ChakraPetch-Regular" family="Chakra Petch" pointSize="14"/>
                                                                 <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -303,7 +302,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                             </textField>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P4-8I-rTA">
-                                                <rect key="frame" x="15" y="655.33333333333337" width="363" height="220"/>
+                                                <rect key="frame" x="15" y="628.66666666666663" width="363" height="220"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="220" id="2jL-rY-RpR"/>
                                                 </constraints>
@@ -332,6 +331,7 @@
                                             <constraint firstItem="pIy-do-KQh" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="LNb-YQ-Xte"/>
                                             <constraint firstItem="LK0-tt-q5o" firstAttribute="top" secondItem="pIy-do-KQh" secondAttribute="bottom" constant="5" id="M1c-rf-iVF"/>
                                             <constraint firstItem="7M6-D4-bfZ" firstAttribute="top" secondItem="7tn-hk-00e" secondAttribute="top" id="PiW-PJ-sWq"/>
+                                            <constraint firstAttribute="trailing" secondItem="8ik-a5-gag" secondAttribute="trailing" constant="35" id="UVw-AS-1Ll"/>
                                             <constraint firstItem="0P4-8I-rTA" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="Uwl-44-JdL"/>
                                             <constraint firstItem="O2B-xE-fVg" firstAttribute="top" secondItem="RiN-3X-ecx" secondAttribute="bottom" constant="55" id="YRr-BT-d7h"/>
                                             <constraint firstAttribute="trailing" secondItem="LK0-tt-q5o" secondAttribute="trailing" constant="15" id="bMZ-TC-FxH"/>
