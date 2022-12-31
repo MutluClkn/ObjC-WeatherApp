@@ -47,6 +47,7 @@
     self.searchTextField.delegate = self;
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     [self gestureRecognizer];
+    [self fetchCoordinatesFromMap];
     
     self.lonArrayStr = [[NSMutableArray alloc] init];
     self.latArrayStr = [[NSMutableArray alloc] init];
@@ -119,8 +120,8 @@
 }
 
 #pragma mark - Fetch Coordinates
+//From API
 -(void)fetchCoordinates{
-    
     self.searchText = [self.searchTextField text];
     NSMutableString *urlString = [NSMutableString stringWithString: @"https://api.openweathermap.org/data/2.5/weather?q=&appid=987329bc91f6216677fbf31bf4b51a8b&units=metric"];
     [urlString insertString:self.searchText atIndex:50];
@@ -164,6 +165,37 @@
         }
         
     }] resume];
+}
+//From Map
+- (void)fetchCoordinatesFromMap{
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(locationPicker:)];
+    gestureRecognizer.minimumPressDuration = 1.3;
+    [self.mapView addGestureRecognizer:gestureRecognizer];
+
+}
+- (void)locationPicker: (UILongPressGestureRecognizer*) gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        CGPoint tappedLocation = [gestureRecognizer locationInView:self.mapView];
+        CLLocationCoordinate2D getLocation = [self.mapView convertPoint:tappedLocation toCoordinateFromView:self.mapView];
+
+        NSString *lat = [NSString stringWithFormat:@"%.8f", getLocation.latitude];
+        NSString *lon = [NSString stringWithFormat:@"%.8f", getLocation.longitude];
+
+        [self.myLocationManger stopUpdatingLocation];
+        [self.lonArrayStr removeAllObjects];
+        [self.latArrayStr removeAllObjects];
+        
+        [self.lonArrayStr addObject:lon];
+        [self.latArrayStr addObject:lat];
+        
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+        annotation.coordinate = getLocation;
+        [self.mapView addAnnotation:annotation];
+        
+        //NSLog(@"%@ and %@",lat,lon);
+        
+        [self fetchWeather];
+    }
 }
 
 #pragma mark - Fetch Weather
