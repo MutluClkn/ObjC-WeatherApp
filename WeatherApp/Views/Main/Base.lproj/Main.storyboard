@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tn-hk-00e">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="863.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="897.33333333333337"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 September, Sunday" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK0-tt-q5o">
                                                 <rect key="frame" x="15" y="89.333333333333343" width="363" height="19.666666666666671"/>
@@ -301,7 +301,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" returnKeyType="search"/>
                                             </textField>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P4-8I-rTA">
-                                                <rect key="frame" x="15" y="628.66666666666663" width="363" height="220"/>
+                                                <rect key="frame" x="15" y="662.33333333333337" width="363" height="220"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="220" id="2jL-rY-RpR"/>
                                                 </constraints>
@@ -311,6 +311,12 @@
                                                 <rect key="frame" x="15" y="60.000000000000007" width="363" height="24.333333333333336"/>
                                                 <fontDescription key="fontDescription" name="RussoOne-Regular" family="Russo One" pointSize="20"/>
                                                 <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can get weather data by holding 3 seconds to a place on the map." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L7-WL-reZ">
+                                                <rect key="frame" x="15" y="615.66666666666663" width="363" height="36.666666666666629"/>
+                                                <fontDescription key="fontDescription" name="ChakraPetch-Regular" family="Chakra Petch" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -325,6 +331,7 @@
                                             <constraint firstAttribute="trailing" secondItem="7M6-D4-bfZ" secondAttribute="trailing" id="90b-zB-oga"/>
                                             <constraint firstAttribute="trailing" secondItem="pIy-do-KQh" secondAttribute="trailing" constant="15" id="9Ta-gY-iYd"/>
                                             <constraint firstAttribute="trailing" secondItem="RiN-3X-ecx" secondAttribute="trailing" constant="50" id="DrQ-hB-VGa"/>
+                                            <constraint firstItem="6L7-WL-reZ" firstAttribute="top" secondItem="O2B-xE-fVg" secondAttribute="bottom" constant="32" id="H2Y-qE-y2l"/>
                                             <constraint firstItem="RiN-3X-ecx" firstAttribute="top" secondItem="7FQ-mn-0GG" secondAttribute="bottom" constant="50" id="Ha7-GP-TIh"/>
                                             <constraint firstItem="pIy-do-KQh" firstAttribute="top" secondItem="7M6-D4-bfZ" secondAttribute="bottom" constant="15" id="JiJ-1g-g3A"/>
                                             <constraint firstItem="pIy-do-KQh" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="LNb-YQ-Xte"/>
@@ -332,6 +339,7 @@
                                             <constraint firstItem="7M6-D4-bfZ" firstAttribute="top" secondItem="7tn-hk-00e" secondAttribute="top" id="PiW-PJ-sWq"/>
                                             <constraint firstAttribute="trailing" secondItem="8ik-a5-gag" secondAttribute="trailing" constant="35" id="UVw-AS-1Ll"/>
                                             <constraint firstItem="0P4-8I-rTA" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="Uwl-44-JdL"/>
+                                            <constraint firstAttribute="trailing" secondItem="6L7-WL-reZ" secondAttribute="trailing" constant="15" id="WZh-Zm-ku3"/>
                                             <constraint firstItem="O2B-xE-fVg" firstAttribute="top" secondItem="RiN-3X-ecx" secondAttribute="bottom" constant="55" id="YRr-BT-d7h"/>
                                             <constraint firstAttribute="trailing" secondItem="LK0-tt-q5o" secondAttribute="trailing" constant="15" id="bMZ-TC-FxH"/>
                                             <constraint firstItem="8ik-a5-gag" firstAttribute="leading" secondItem="7FQ-mn-0GG" secondAttribute="trailing" constant="10" id="bvN-oG-BPP"/>
@@ -339,8 +347,9 @@
                                             <constraint firstItem="7M6-D4-bfZ" firstAttribute="leading" secondItem="hDb-39-bJg" secondAttribute="trailing" id="ebZ-m1-a9N"/>
                                             <constraint firstAttribute="bottom" secondItem="0P4-8I-rTA" secondAttribute="bottom" constant="15" id="gJO-lo-g78"/>
                                             <constraint firstItem="8ik-a5-gag" firstAttribute="leading" secondItem="iB2-nV-cdL" secondAttribute="trailing" constant="10" id="hP2-wV-QiH"/>
+                                            <constraint firstItem="6L7-WL-reZ" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="hpm-am-wOt"/>
                                             <constraint firstItem="O2B-xE-fVg" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="mBB-1I-d9g"/>
-                                            <constraint firstItem="0P4-8I-rTA" firstAttribute="top" secondItem="O2B-xE-fVg" secondAttribute="bottom" constant="45" id="ns5-DU-PKT"/>
+                                            <constraint firstItem="0P4-8I-rTA" firstAttribute="top" secondItem="6L7-WL-reZ" secondAttribute="bottom" constant="10" id="ns5-DU-PKT"/>
                                             <constraint firstAttribute="trailing" secondItem="0P4-8I-rTA" secondAttribute="trailing" constant="15" id="nvE-QZ-N4V"/>
                                             <constraint firstItem="gah-v9-eNf" firstAttribute="top" secondItem="7tn-hk-00e" secondAttribute="top" id="pDq-CF-XiT"/>
                                             <constraint firstItem="LK0-tt-q5o" firstAttribute="leading" secondItem="7tn-hk-00e" secondAttribute="leading" constant="15" id="qap-wa-oTV"/>
@@ -387,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvI-Ex-3wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="968.79999999999995" y="-131.78410794602701"/>
+            <point key="canvasLocation" x="968.70229007633588" y="-132.3943661971831"/>
         </scene>
     </scenes>
     <resources>

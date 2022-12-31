@@ -40,6 +40,8 @@
 #pragma mark - Implementation
 @implementation ViewController
 
+double tempDouble = 0.0;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -270,9 +272,10 @@
             // NSLog(@"Time: %@", headerDate);
             
             NSDictionary *main = [listIndex objectForKey:@"main"];
-            NSNumber *temp = [main objectForKey:@"temp"];
+            tempDouble = [[main objectForKey:@"temp"] floatValue];
+            NSString *newTemp = [NSString stringWithFormat:@"%.1f", tempDouble];
             NSNumber *humidity = [main objectForKey:@"humidity"];
-            [self.cityTemp addObject:temp];
+            [self.cityTemp addObject:newTemp];
             //NSLog(@"Temp: %@", temp);
             [self.humidity addObject:humidity];
             //NSLog(@"Humidity: %@", humidity);
@@ -326,7 +329,7 @@
             
             self.dateLabel.text = self.headerDate[0];
             
-            NSString *temp = [self.cityTemp[0] stringValue];
+            NSString *temp = self.cityTemp[0];
             NSString *newTemp = [NSString stringWithFormat:@"%@°",temp];
             self.tempLabel.text = newTemp;
             
@@ -390,7 +393,7 @@
         //View configuration
         cell.myView.layer.cornerRadius = cell.myView.frame.size.height * 0.1;
         //Temp
-        NSString *temp = [self.cityTemp[indexPath.row] stringValue];
+        NSString *temp = self.cityTemp[indexPath.row];
         cell.tempLabel.text = temp;
         //Time
         cell.timeLabel.text = self.time[indexPath.row];
