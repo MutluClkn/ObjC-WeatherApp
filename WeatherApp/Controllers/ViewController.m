@@ -28,9 +28,6 @@
 @property (strong, nonatomic) NSMutableArray *lonArrayStr;
 @property (strong, nonatomic) NSMutableArray *latArrayStr;
 
-@property (strong, nonatomic) NSMutableDictionary *coord;
-@property (strong, nonatomic) NSMutableDictionary *list;
-@property (strong ,nonatomic) NSMutableDictionary *secondList;
 @property (strong, nonatomic) NSMutableArray *time;
 @property (strong, nonatomic) NSMutableArray *cityName;
 @property (strong, nonatomic) NSMutableArray *cityTemp;
@@ -55,8 +52,6 @@
     
     self.lonArrayStr = [[NSMutableArray alloc] init];
     self.latArrayStr = [[NSMutableArray alloc] init];
-    self.list = [[NSMutableDictionary alloc] init];
-    self.secondList = [[NSMutableDictionary alloc] init];
     self.time = [[NSMutableArray alloc] init];
     self.cityName = [[NSMutableArray alloc] init];
     self.cityTemp = [[NSMutableArray alloc] init];
@@ -128,7 +123,6 @@ NSLog(@"failed to recived user's locatio");
 #pragma mark - Fetch Coordinates
 -(void)fetchCoordinates{
     [self.myLocationManger stopUpdatingLocation];
-    [self.coord removeAllObjects];
     [self.lonArrayStr removeAllObjects];
     [self.latArrayStr removeAllObjects];
     
@@ -146,9 +140,9 @@ NSLog(@"failed to recived user's locatio");
             return;
         }
         
-        self.coord = [coordinatesJSON objectForKey:@"coord"];
-        NSNumber *longitude = [self.coord objectForKey:@"lon"];
-        NSNumber *latitude = [self.coord objectForKey:@"lat"];
+        NSDictionary *coord = [coordinatesJSON objectForKey:@"coord"];
+        NSNumber *longitude = [coord objectForKey:@"lon"];
+        NSNumber *latitude = [coord objectForKey:@"lat"];
         //NSLog(@"%@ and %@", longitude, latitude);
         
         NSString *longString = [longitude stringValue];
@@ -162,7 +156,7 @@ NSLog(@"failed to recived user's locatio");
         
         [self.lonArrayStr addObject:longString];
         [self.latArrayStr addObject:latString];
-        [self.list removeAllObjects];
+
         [self mapConfiguration];
         [self fetchWeather];
 
@@ -203,10 +197,18 @@ NSLog(@"failed to recived user's locatio");
         }
         
         NSDictionary *city = [weatherData objectForKey:@"city"];
-        
-        self.list = [weatherData objectForKey:@"list"];
+        NSDictionary *listDic = [weatherData objectForKey:@"list"];
 
-        for (NSDictionary *listIndex in self.list){
+        [self.headerDate removeAllObjects];
+        [self.time removeAllObjects];
+        [self.cityTemp removeAllObjects];
+        [self.humidity removeAllObjects];
+        [self.weatherID removeAllObjects];
+        [self.condition removeAllObjects];
+        [self.clouds removeAllObjects];
+        [self.wind removeAllObjects];
+        
+        for (NSDictionary *listIndex in listDic){
             
             NSString *time = [listIndex objectForKey:@"dt_txt"];
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -320,21 +322,34 @@ NSLog(@"failed to recived user's locatio");
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
     CollectionViewCell *cell = (CollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    //View configuration
-    cell.myView.layer.cornerRadius = cell.myView.frame.size.height * 0.1;
-    //Temp
-    NSString *temp = [self.cityTemp[indexPath.row] stringValue];
-    cell.tempLabel.text = temp;
-    //Time
-    cell.timeLabel.text = self.time[indexPath.row];
-    //Image
-    cell.weatherImage.image = [UIImage imageNamed:self.weatherID[indexPath.row]];
-    
-    return cell;
+    if (self.cityTemp != nil){
+        //View configuration
+        cell.myView.layer.cornerRadius = cell.myView.frame.size.height * 0.1;
+        //Temp
+        NSString *temp = [self.cityTemp[indexPath.row] stringValue];
+        cell.tempLabel.text = temp;
+        //Time
+        cell.timeLabel.text = self.time[indexPath.row];
+        //Image
+        cell.weatherImage.image = [UIImage imageNamed:self.weatherID[indexPath.row]];
+        
+        return cell;
+    }else{
+        cell.myView.layer.cornerRadius = cell.myView.frame.size.height * 0.1;
+        NSString *temp = @"--";
+        cell.tempLabel.text = temp;
+        cell.timeLabel.text = @"--";
+        cell.weatherImage.image = [UIImage imageNamed:@"Wind"];
+        return cell;
+    }
 }
 //Number of Items in Section
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.cityTemp.count;
+    if (self.cityTemp.count != nil){
+        return self.cityTemp.count;
+    }else{
+        return 0;
+    }
 }
 
 @end

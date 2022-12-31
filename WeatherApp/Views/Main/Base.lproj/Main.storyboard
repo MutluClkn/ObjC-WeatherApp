@@ -32,9 +32,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiR-lI-mMP">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiR-lI-mMP">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tn-hk-00e">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="863.66666666666663"/>
@@ -365,6 +364,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VEC-nc-HCD"/>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.11372549019607843" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VEC-nc-HCD" firstAttribute="bottom" secondItem="eiR-lI-mMP" secondAttribute="bottom" id="Vuf-v3-URK"/>
+                            <constraint firstItem="VEC-nc-HCD" firstAttribute="trailing" secondItem="eiR-lI-mMP" secondAttribute="trailing" id="sXC-er-wyW"/>
+                            <constraint firstItem="eiR-lI-mMP" firstAttribute="leading" secondItem="VEC-nc-HCD" secondAttribute="leading" id="x3e-f0-u3D"/>
+                            <constraint firstItem="eiR-lI-mMP" firstAttribute="top" secondItem="VEC-nc-HCD" secondAttribute="top" id="yqB-Ix-Vly"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="cityLabel" destination="pIy-do-KQh" id="Rjj-Qo-1VM"/>
@@ -382,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvI-Ex-3wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="970.2290076335878" y="-131.69014084507043"/>
+            <point key="canvasLocation" x="968.79999999999995" y="-131.78410794602701"/>
         </scene>
     </scenes>
     <resources>
