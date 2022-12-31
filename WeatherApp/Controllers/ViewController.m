@@ -102,6 +102,7 @@
         [self.latArrayStr addObject:lat];
         [self mapConfiguration];
         [self fetchWeather];
+        [self.myLocationManger stopUpdatingLocation];
     } else {
         
         [self.lonArrayStr addObject:@"-2.15"];
@@ -191,7 +192,6 @@
         NSString *lat = [NSString stringWithFormat:@"%.8f", getLocation.latitude];
         NSString *lon = [NSString stringWithFormat:@"%.8f", getLocation.longitude];
 
-        [self.myLocationManger stopUpdatingLocation];
         [self.lonArrayStr removeAllObjects];
         [self.latArrayStr removeAllObjects];
         
