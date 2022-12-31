@@ -13,7 +13,7 @@
 @import CoreLocation;
 
 #pragma mark - Interface
-@interface ViewController () <UICollectionViewDataSource, CLLocationManagerDelegate>
+@interface ViewController () <UICollectionViewDataSource, CLLocationManagerDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong)CLLocationManager *myLocationManger;
 @property (nonatomic,strong)CLLocation *myLocation;
@@ -44,7 +44,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.collectionView.dataSource = self;
-    
+    self.searchTextField.delegate = self;
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     
     self.lonArrayStr = [[NSMutableArray alloc] init];
@@ -65,15 +65,15 @@
     self.myLocationManger = [[CLLocationManager alloc] init];
     self.myLocationManger.delegate = self;
     if ([self.myLocationManger respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-            [self.myLocationManger requestWhenInUseAuthorization];
-        }
+        [self.myLocationManger requestWhenInUseAuthorization];
+    }
     [self.myLocationManger startUpdatingLocation];
 }
 
 #pragma mark - CoreLocation
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     //This method will show us that we recieved the new location
-
+    
     CLLocation *newLocation = [locations lastObject];
     NSLog(@"didUpdateLocations %@", newLocation);
     
@@ -82,8 +82,8 @@
     
 }
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-//Failed to recieve user's location
-NSLog(@"failed to recived user's locatio");
+    //Failed to recieve user's location
+    NSLog(@"failed to recived user's locatio");
 }
 
 #pragma mark - Update Location via CoreLocation
@@ -119,13 +119,11 @@ NSLog(@"failed to recived user's locatio");
 
 #pragma mark - Fetch Coordinates
 -(void)fetchCoordinates{
-    [self.myLocationManger stopUpdatingLocation];
-    [self.lonArrayStr removeAllObjects];
-    [self.latArrayStr removeAllObjects];
     
     self.searchText = [self.searchTextField text];
     NSMutableString *urlString = [NSMutableString stringWithString: @"https://api.openweathermap.org/data/2.5/weather?q=&appid=987329bc91f6216677fbf31bf4b51a8b&units=metric"];
     [urlString insertString:self.searchText atIndex:50];
+    
     NSURL *url = [NSURL URLWithString:urlString];
     [[NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -145,20 +143,26 @@ NSLog(@"failed to recived user's locatio");
         NSString *longString = [longitude stringValue];
         NSString *latString = [latitude stringValue];
         
-        [self.lonStr appendString:[longitude stringValue]];
-        [self.latStr appendString:[latitude stringValue]];
+        if (longString != nil && latString != nil){
+            
+            [self.myLocationManger stopUpdatingLocation];
+            [self.lonArrayStr removeAllObjects];
+            [self.latArrayStr removeAllObjects];
+            
+            [self.lonStr appendString:[longitude stringValue]];
+            [self.latStr appendString:[latitude stringValue]];
+            
+            
+            //NSLog(@"COORDINATES: %@ and %@", longString, latString);
+            
+            [self.lonArrayStr addObject:longString];
+            [self.latArrayStr addObject:latString];
+            
+            [self mapConfiguration];
+            [self fetchWeather];
+        }
         
-        
-        //NSLog(@"COORDINATES: %@ and %@", longString, latString);
-        
-        [self.lonArrayStr addObject:longString];
-        [self.latArrayStr addObject:latString];
-
-        [self mapConfiguration];
-        [self fetchWeather];
-
-        
-    }] resume];
+    }] resume];  
 }
 
 #pragma mark - Fetch Weather
@@ -195,7 +199,7 @@ NSLog(@"failed to recived user's locatio");
         
         NSDictionary *city = [weatherData objectForKey:@"city"];
         NSDictionary *listDic = [weatherData objectForKey:@"list"];
-
+        
         [self.headerDate removeAllObjects];
         [self.time removeAllObjects];
         [self.cityTemp removeAllObjects];
@@ -254,7 +258,7 @@ NSLog(@"failed to recived user's locatio");
             else if ([weatherID intValue] >= 801 && [weatherID intValue] <= 804){
                 [self.weatherID addObject:@"Few-Clouds"];
             }
-
+            
             //NSLog(@"WeatherID: %@", self.weatherID);
             NSString *description = [weather[0] objectForKey:@"description"];
             [self.condition addObject:description];
@@ -306,12 +310,22 @@ NSLog(@"failed to recived user's locatio");
         [self fetchCoordinates];
         self.searchTextField.text = @"";
     }
+    [self.searchTextField endEditing:true];
 }
 //Current Location of User
 - (IBAction)currentLocationButtonDidPress:(UIButton *)sender {
     [self.myLocationManger startUpdatingLocation];
 }
 
+#pragma mark - TextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (![self.searchTextField.text  isEqual: @""]){
+        [self fetchCoordinates];
+        self.searchTextField.text = @"";
+    }
+    [self.searchTextField endEditing:true];
+    return true;
+}
 
 
 #pragma mark - CollectionViewDataSource
@@ -342,11 +356,7 @@ NSLog(@"failed to recived user's locatio");
 }
 //Number of Items in Section
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.cityTemp.count != nil){
-        return self.cityTemp.count;
-    }else{
-        return 0;
-    }
+    return self.cityTemp.count;
 }
 
 @end
