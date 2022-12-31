@@ -46,6 +46,7 @@
     self.collectionView.dataSource = self;
     self.searchTextField.delegate = self;
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    [self gestureRecognizer];
     
     self.lonArrayStr = [[NSMutableArray alloc] init];
     self.latArrayStr = [[NSMutableArray alloc] init];
@@ -162,7 +163,7 @@
             [self fetchWeather];
         }
         
-    }] resume];  
+    }] resume];
 }
 
 #pragma mark - Fetch Weather
@@ -327,6 +328,16 @@
     return true;
 }
 
+#pragma mark - Dismiss Keyboard by Tapping Screen
+-(void)gestureRecognizer{
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:gestureRecognizer];
+    gestureRecognizer.cancelsTouchesInView = NO;
+
+}
+- (void)dismissKeyboard{
+     [self.view endEditing:YES];
+}
 
 #pragma mark - CollectionViewDataSource
 //Cell For Item at IndexPath
