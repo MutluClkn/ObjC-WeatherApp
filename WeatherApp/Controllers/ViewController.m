@@ -48,6 +48,7 @@
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     [self gestureRecognizer];
     [self fetchCoordinatesFromMap];
+    [self gestureRecogForUpdatingLocation];
     
     self.lonArrayStr = [[NSMutableArray alloc] init];
     self.latArrayStr = [[NSMutableArray alloc] init];
@@ -117,6 +118,15 @@
     
     [_mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat, lon), MKCoordinateSpanMake(1.5, 1.5)) animated:true];
     
+}
+
+- (void)gestureRecogForUpdatingLocation{
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopUpdateLocation)];
+    [self.view addGestureRecognizer:gestureRecognizer];
+    gestureRecognizer.cancelsTouchesInView = NO;
+}
+- (void)stopUpdateLocation{
+    [self.myLocationManger stopUpdatingLocation];
 }
 
 #pragma mark - Fetch Coordinates
