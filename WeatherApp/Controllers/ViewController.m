@@ -10,9 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import "CollectionViewCell.h"
-#import "QDCoordinateData.h"
-#import "QTWeatherData.h"
-#import "CoordinateModel.h"
 @import CoreLocation;
 
 #pragma mark - Interface
