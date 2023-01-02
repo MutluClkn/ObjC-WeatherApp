@@ -319,7 +319,8 @@ double tempDouble = 0.0;
             
             NSDictionary *wind = [listIndex objectForKey:@"wind"];
             NSNumber *speed = [wind objectForKey:@"speed"];
-            [self.wind addObject:speed];
+            NSString *speedStr = [NSString stringWithFormat:@"%.1f", [speed floatValue]];
+            [self.wind addObject:speedStr];
             //NSLog(@"Wind: %@", speed);
             
         }
@@ -337,7 +338,7 @@ double tempDouble = 0.0;
             
             self.weatherConditionLabel.text = [self.condition[0] uppercaseString];
             
-            self.windLabel.text = [self.wind[0] stringValue];
+            self.windLabel.text = self.wind[0];
             self.humidityLabel.text = [self.humidity[0] stringValue];
             NSString *cloud = [self.clouds[0] stringValue];
             NSString *newCloud = [NSString stringWithFormat:@"%%%@",cloud];
