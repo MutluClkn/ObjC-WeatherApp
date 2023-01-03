@@ -13,7 +13,7 @@
 @import CoreLocation;
 
 #pragma mark - Interface
-@interface ViewController () <UICollectionViewDataSource, CLLocationManagerDelegate, UITextFieldDelegate>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong)CLLocationManager *myLocationManger;
 @property (nonatomic,strong)CLLocation *myLocation;
@@ -46,6 +46,7 @@ double tempDouble = 0.0;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
     self.searchTextField.delegate = self;
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     [self gestureRecognizer];
@@ -253,6 +254,7 @@ double tempDouble = 0.0;
         [self.condition removeAllObjects];
         [self.clouds removeAllObjects];
         [self.wind removeAllObjects];
+        [self.cityName removeAllObjects];
         
         for (NSDictionary *listIndex in listDic){
             
@@ -325,8 +327,11 @@ double tempDouble = 0.0;
             
         }
         
+        NSString *cityLabel = [city objectForKey:@"name"];
+        [self.cityName addObject:cityLabel];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.cityLabel.text = [city objectForKey:@"name"];
+            self.cityLabel.text = self.cityName[0];
             
             self.dateLabel.text = self.headerDate[0];
             
@@ -414,6 +419,31 @@ double tempDouble = 0.0;
 //Number of Items in Section
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.cityTemp.count;
+}
+
+#pragma mark - CollectionViewDelegate
+//Did Select Item at IndexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.cityLabel.text = self.cityName[0];
+        
+        self.dateLabel.text = self.headerDate[indexPath.row];
+        
+        NSString *temp = self.cityTemp[indexPath.row];
+        NSString *newTemp = [NSString stringWithFormat:@"%@°",temp];
+        self.tempLabel.text = newTemp;
+        
+        self.weatherImageView.image = [UIImage imageNamed:self.weatherID[indexPath.row]];
+        
+        self.weatherConditionLabel.text = [self.condition[indexPath.row] uppercaseString];
+        
+        self.windLabel.text = self.wind[indexPath.row];
+        self.humidityLabel.text = [self.humidity[indexPath.row] stringValue];
+        NSString *cloud = [self.clouds[indexPath.row] stringValue];
+        NSString *newCloud = [NSString stringWithFormat:@"%%%@",cloud];
+        self.cloudsLabel.text = newCloud;
+        [self.collectionView reloadData];
+    });
 }
 
 @end
